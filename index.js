@@ -5,7 +5,7 @@ const mysql = require("mysql");
 let employeeArray = [];
 
 //this is the first question user will see
-inquirer.prompt([
+const question1Prompt = inquirer.prompt([
     {
         type: "list",
         name: "question1",
@@ -40,6 +40,19 @@ inquirer.prompt([
     }
 });
 
+//This question should come after the user wants to remove an employee
+const question2Prompt = inquirer.prompt([
+    {
+        type: "list",
+        name: "question2",
+        message: "Which employee do you want to remove?",
+        choices: employeeArray
+    }
+])
+.then((selectedEmployee) =>{
+    console.log("Call the delete function");
+});
+
 //Writing out the functions for to interact with sql database
 
 //READ employees
@@ -61,6 +74,7 @@ const deleteEmployees = function deleteEmployee() {
     function (err, res) {
         if (err) throw err;
         console.log("Removed employee from the database");
+        //write a function to loop over the array and remove the removed employee from the array;
         connection.end;
     }
     );
