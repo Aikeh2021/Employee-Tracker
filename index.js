@@ -1,6 +1,18 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 
+//Setting up the connection to mySQL
+var connection = mysql.createConnection({
+    host: "localhost",
+    port: 3306,
+    user: "root",
+    password: "GTPTFall2020",
+    database: "company_db"
+});
+
+
+
+
 //Each time an employee is added, they need to be pushed into an array. This will help with the remove employee function
 let employeeArray = [];
 let managerArray = ["Not Applicable"];
