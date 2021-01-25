@@ -36,3 +36,14 @@ inquirer.prompt([
         console.log("Goodbye!");
     }
 });
+
+//Writing out the functions for to interact with sql database
+
+//READ employees
+const readAllEmployees = function readEmployees(){
+    connection.query("SELECT * FROM employee", function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        connection.end;
+    });
+}
