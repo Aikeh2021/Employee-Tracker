@@ -4,6 +4,8 @@ const mysql = require("mysql");
 //Each time an employee is added, they need to be pushed into an array. This will help with the remove employee function
 let employeeArray = [];
 let managerArray = ["Not Applicable"];
+let roleArray = [];
+let departmentArray = [];
 
 //this is the first question user will see
 const question1Prompt = inquirer.prompt([
@@ -11,7 +13,7 @@ const question1Prompt = inquirer.prompt([
         type: "list",
         name: "question1",
         message: "What would you like to do?",
-        choices: ["View all employees", "View all employees by department", "View all employees by manager", "Add employee", "Remove employee", "Update employee role", "Update employee manager"]
+        choices: ["View all employees", "View all employees by department", "View all employees by manager", "Add employee", "Remove employee", "Update employee role", "Update employee manager", "Add a department", "Add a role", "View all departments", "View all roles"]
     }
 ])
 .then((response) => {
@@ -35,6 +37,18 @@ const question1Prompt = inquirer.prompt([
     }
     else if(response.question1 === "Update employee manager"){
         console.log("Update employee with id of blank, manager to blank");
+    }
+    else if(response.question1 === "Add a department"){
+        console.log("Call function to create a department");
+    }
+    else if(response.question1 === "Add a role"){
+        console.log("Call a function to create a role");
+    }
+    else if(response.question1 === "View all departments"){
+        console.log("Call a function to display all the departments")
+    }
+    else if(response.question1 === "View all roles"){
+        console.log("Call a function to display all the roles");
     }
     else{
         console.log("Goodbye!");
