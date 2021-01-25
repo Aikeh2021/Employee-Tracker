@@ -46,6 +46,7 @@ const question1Prompt = function askQuestion1(){
         }
         else if(response.question1 === "Add employee"){
             console.log("Insert into employee table");
+            question3Prompt();
         }
         else if(response.question1 === "Remove employee"){
             console.log("Delete from employee table");
@@ -91,36 +92,38 @@ const question2Prompt = function askQuestion2(){
     });
     
     //This question should come after the user wants to add an employee
-    const question3Prompt = inquirer.prompt([
-        {
-            type: "input",
-            name: "question3P1",
-            message: "What is the employee's first name?"
-        },
-        {
-            type: "input",
-            name: "question3P2",
-            message: "What is the employee's last name?"
-        },
-        {
-            type: "list",
-            name: "question3P3",
-            message: "What is the employee's role?",
-            choices: roleTitleArray
-        },
-        {
-            type: "list",
-            name: "question3P4",
-            message: "Who is the employee's manager?",
-            choices: managerArray
-        }
-    ])
-    .then((createdEmployee) =>{
-        console.log(`Added ${createdEmployee.question3P1} ${createdEmployee.question3P2} to the database`);
-        //call the createEmployee function
-        //Update the employee array
-    });
-};
+    const question3Prompt = function askAddFollowUps(){
+        inquirer.prompt([
+            {
+                type: "input",
+                name: "question3P1",
+                message: "What is the employee's first name?"
+            },
+            {
+                type: "input",
+                name: "question3P2",
+                message: "What is the employee's last name?"
+            },
+            {
+                type: "list",
+                name: "question3P3",
+                message: "What is the employee's role?",
+                choices: roleTitleArray
+            },
+            {
+                type: "list",
+                name: "question3P4",
+                message: "Who is the employee's manager?",
+                choices: managerArray
+            }
+        ])
+        .then((createdEmployee) =>{
+            console.log(`Added ${createdEmployee.question3P1} ${createdEmployee.question3P2} to the database`);
+            //call the createEmployee function
+            //Update the employee array
+        });
+    };
+    }
 
 
 //Writing out the functions for to interact with sql database
