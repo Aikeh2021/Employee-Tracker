@@ -32,4 +32,7 @@ inquirer.prompt([
     else if(response.question1 === "Update employee manager"){
         console.log("Update employee with id of blank, manager to blank");
     }
+    else{
+        console.log("Goodbye!");
+    }
 });
