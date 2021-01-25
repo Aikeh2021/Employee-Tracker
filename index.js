@@ -58,7 +58,8 @@ const question1Prompt = function askQuestion1(){
             console.log("Update employee with id of blank, manager to blank");
         }
         else if(response.question1 === "Add a department"){
-            console.log("Call function to create a department");
+            // console.log("Call function to create a department");
+            addDepartment();
         }
         else if(response.question1 === "Add a role"){
             console.log("Call a function to create a role");
@@ -96,7 +97,6 @@ const question2Prompt = function askQuestion2(){
 
     //This question should come after the user wants to add an employee
 function askAddFollowUps(){
-        console.log("something");
         inquirer.prompt([
             {
                 type: "input",
@@ -192,10 +192,23 @@ function readRoles(){
 
 //INSERT INTO departments (add a department)
 function addDepartment(){
-    connection.query("INSERT INTO department SET ?",
-    {
-        name: 
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: "What is the name of the department you would like to add?"
+        }
+    ])
+    .then((response) => {
+        connection.query("INSERT INTO department SET ?",
+        response,
+        function(err, res){
+            if(err) throw err;
+        question1Prompt();
+        }
+        )
     })
+
 }
 
 //Writing a function to end the computer management system if the user chooses to exit
