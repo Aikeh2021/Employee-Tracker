@@ -64,7 +64,8 @@ const question1Prompt = function askQuestion1(){
             console.log("Call a function to create a role");
         }
         else if(response.question1 === "View all departments"){
-            console.log("Call a function to display all the departments")
+            // console.log("Call a function to display all the departments")
+            readDepartments();
         }
         else if(response.question1 === "View all roles"){
             console.log("Call a function to display all the roles");
@@ -167,9 +168,9 @@ function readEmployees(){
     });
 }
 
-//READ employees
-const readAllEmployees = function readEmployees(){
-    connection.query("SELECT * FROM employee", function(err, res) {
+//READ departments
+ function readDepartments(){
+    connection.query("SELECT * FROM department", function(err, res) {
         if (err) throw err;
         console.table(res);
         connection.end;
