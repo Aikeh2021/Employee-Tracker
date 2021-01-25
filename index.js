@@ -54,7 +54,6 @@ const question2Prompt = inquirer.prompt([
     console.log("Call the delete function");
     //call the delete employee function
     //loop over the employee array and remove the selected employee
-    question1Prompt();
 });
 
 //This question should come after the user wants to add an employee
@@ -86,7 +85,6 @@ const question3Prompt = inquirer.prompt([
     console.log(`Added ${createdEmployee.question3P1} ${createdEmployee.question3P2} to the database`);
     //call the createEmployee function
     //Update the employee array
-    question1Prompt();
 })
 
 //Writing out the functions for to interact with sql database
@@ -97,6 +95,7 @@ const readAllEmployees = function readEmployees(){
         if (err) throw err;
         console.table(res);
         connection.end;
+        question1Prompt();
     });
 }
 
@@ -112,6 +111,25 @@ const deleteEmployees = function deleteEmployee() {
         console.log("Removed employee from the database");
         //write a function to loop over the array and remove the removed employee from the array;
         connection.end;
+        question1Prompt();
     }
     );
+}
+
+//CREATE an employee
+const createEmployees = function createEmployee(){
+    let query = connection.query(
+        "INSERT INTO employee SET ?",
+        {
+            first_name: "employee's first name",
+            last_name: "employee's last name",
+            role_id: "employee's role",
+            manager_id: "employee's manager"
+        },
+        function(err, res) {
+            if(err) throw err;
+            //push the new employee's first and last name into an empty string and then into the employee array;
+            question1Prompt();
+        }
+    )
 }
