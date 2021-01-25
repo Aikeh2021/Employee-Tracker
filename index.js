@@ -17,12 +17,6 @@ connection.connect(function(err) {
 })
 
 
-//Each time an employee is added, they need to be pushed into an array. This will help with the remove employee function
-// let employeeArray = [];
-// let managerArray = ["Not Applicable"];
-// let roleTitleArray = ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"];
-// let departmentArray = ["Sales", "Engineering", "Finance", "Legal"];
-
 //this is the first question user will see
 const question1Prompt = function askQuestion1(){
     inquirer.prompt([
@@ -49,7 +43,8 @@ const question1Prompt = function askQuestion1(){
             askAddFollowUps()
         }
         else if(response.question1 === "Remove employee"){
-            console.log("Delete from employee table");
+            // console.log("Delete from employee table");
+            removeEmployee();
         }
         else if(response.question1 === "Update employee role"){
             console.log("Update employee with id of blank, role to blank");
@@ -79,19 +74,28 @@ const question1Prompt = function askQuestion1(){
 };
 
 //This question should come after the user wants to remove an employee
-const question2Prompt = function askQuestion2(){
+function removeEmployee(){
+    connection.query("SELECT * FROM employee", function (err, res){
+        if(err) throw err;
     inquirer.prompt([
         {
             type: "list",
-            name: "question2",
+            name: "employee",
             message: "Which employee do you want to remove?",
-            choices: employeeArray
+            choices: res.map((employee) => `${employee.first_name} ${employee.last_name}`)
         }
     ])
-    .then((selectedEmployee) =>{
-        console.log("Call the delete function");
-        //call the delete employee function
-        //loop over the employee array and remove the selected employee
+    .then((toRemove) =>{
+        connection.query('DELETE FROM employee WHERE  first_name = ? last_name = ?' [toRemove], function(err, res) {
+            if(err) throw err;
+            console.log("Removed an employee");
+            question1Prompt();
+        })
+    })
+    
+
+
+    
     });
 }
 
@@ -136,25 +140,6 @@ function askAddFollowUps(){
     });
         
     };
-    
-
-//DELETE an employee
-const deleteEmployees = function deleteEmployee() {
-    connection.query("DELETE FROM employee WHERE ?",
-    {
-        first_name: "employee's first name",
-        last_name: "employee's last name"
-    },
-    function (err, res) {
-        if (err) throw err;
-        console.log("Removed employee from the database");
-        //write a function to loop over the array and remove the removed employee from the array;
-        connection.end;
-        question1Prompt();
-    }
-    );
-}
-
 
 
 //Writing out the functions for to interact with sql database
@@ -210,6 +195,8 @@ function addDepartment(){
     })
 
 }
+
+
 
 //Writing a function to end the computer management system if the user chooses to exit
 function exit(){
