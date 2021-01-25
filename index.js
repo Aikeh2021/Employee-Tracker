@@ -40,7 +40,7 @@ const question1Prompt = function askQuestion1(){
         }
         else if(response.question1 === "Add employee"){
             // console.log("Insert into employee table");
-            askAddFollowUps()
+            addEmployee()
         }
         else if(response.question1 === "Remove employee"){
             // console.log("Delete from employee table");
@@ -100,7 +100,7 @@ function removeEmployee(){
 }
 
     //This question should come after the user wants to add an employee
-function askAddFollowUps(){
+function addEmployee(){
         inquirer.prompt([
             {
                 type: "input",
