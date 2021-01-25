@@ -21,7 +21,7 @@ connection.connect(function(err) {
 let employeeArray = [];
 let managerArray = ["Not Applicable"];
 let roleTitleArray = ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"];
-let departmentArray = [""];
+let departmentArray = ["Sales", "Engineering", "Finance", "Legal"];
 
 //this is the first question user will see
 const question1Prompt = function askQuestion1(){
