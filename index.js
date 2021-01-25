@@ -20,8 +20,8 @@ connection.connect(function(err) {
 //Each time an employee is added, they need to be pushed into an array. This will help with the remove employee function
 let employeeArray = [];
 let managerArray = ["Not Applicable"];
-let roleArray = ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead"];
-let departmentArray = [];
+let roleTitleArray = ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"];
+let departmentArray = [""];
 
 //this is the first question user will see
 const question1Prompt = function askQuestion1(){
@@ -105,7 +105,7 @@ const question2Prompt = function askQuestion2(){
             type: "list",
             name: "question3P3",
             message: "What is the employee's role?",
-            choices: roleArray
+            choices: roleTitleArray
         },
         {
             type: "list",
