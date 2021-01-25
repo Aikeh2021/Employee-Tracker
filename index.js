@@ -58,50 +58,53 @@ const question1Prompt = function askQuestion1(){
 };
 
 //This question should come after the user wants to remove an employee
-const question2Prompt = inquirer.prompt([
-    {
-        type: "list",
-        name: "question2",
-        message: "Which employee do you want to remove?",
-        choices: employeeArray
-    }
-])
-.then((selectedEmployee) =>{
-    console.log("Call the delete function");
-    //call the delete employee function
-    //loop over the employee array and remove the selected employee
-});
+const question2Prompt = function askQuestion2(){
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "question2",
+            message: "Which employee do you want to remove?",
+            choices: employeeArray
+        }
+    ])
+    .then((selectedEmployee) =>{
+        console.log("Call the delete function");
+        //call the delete employee function
+        //loop over the employee array and remove the selected employee
+    });
+    
+    //This question should come after the user wants to add an employee
+    const question3Prompt = inquirer.prompt([
+        {
+            type: "input",
+            name: "question3P1",
+            message: "What is the employee's first name?"
+        },
+        {
+            type: "input",
+            name: "question3P2",
+            message: "What is the employee's last name?"
+        },
+        {
+            type: "list",
+            name: "question3P3",
+            message: "What is the employee's role?",
+            choices: ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead"]
+        },
+        {
+            type: "list",
+            name: "question3P4",
+            message: "Who is the employee's manager?",
+            choices: managerArray
+        }
+    ])
+    .then((createdEmployee) =>{
+        console.log(`Added ${createdEmployee.question3P1} ${createdEmployee.question3P2} to the database`);
+        //call the createEmployee function
+        //Update the employee array
+    });
+};
 
-//This question should come after the user wants to add an employee
-const question3Prompt = inquirer.prompt([
-    {
-        type: "input",
-        name: "question3P1",
-        message: "What is the employee's first name?"
-    },
-    {
-        type: "input",
-        name: "question3P2",
-        message: "What is the employee's last name?"
-    },
-    {
-        type: "list",
-        name: "question3P3",
-        message: "What is the employee's role?",
-        choices: ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead"]
-    },
-    {
-        type: "list",
-        name: "question3P4",
-        message: "Who is the employee's manager?",
-        choices: managerArray
-    }
-])
-.then((createdEmployee) =>{
-    console.log(`Added ${createdEmployee.question3P1} ${createdEmployee.question3P2} to the database`);
-    //call the createEmployee function
-    //Update the employee array
-})
 
 //Writing out the functions for to interact with sql database
 
