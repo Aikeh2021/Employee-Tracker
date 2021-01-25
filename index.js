@@ -18,10 +18,10 @@ connection.connect(function(err) {
 
 
 //Each time an employee is added, they need to be pushed into an array. This will help with the remove employee function
-let employeeArray = [];
-let managerArray = ["Not Applicable"];
-let roleTitleArray = ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"];
-let departmentArray = ["Sales", "Engineering", "Finance", "Legal"];
+// let employeeArray = [];
+// let managerArray = ["Not Applicable"];
+// let roleTitleArray = ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead", "Lawyer"];
+// let departmentArray = ["Sales", "Engineering", "Finance", "Legal"];
 
 //this is the first question user will see
 const question1Prompt = function askQuestion1(){
@@ -36,7 +36,7 @@ const question1Prompt = function askQuestion1(){
     .then((response) => {
         if(response.question1 === "View all employees"){
             // console.log("Read employee table");
-            readAllEmployees();
+            readEmployees();
         }
         else if(response.question1 === "View all employees by department"){
             console.log("Read employees by department");
@@ -160,6 +160,16 @@ const deleteEmployees = function deleteEmployee() {
 
 
 //Writing out the functions for to interact with sql database
+
+//READ employees
+function readEmployees(){
+    connection.query("SELECT * FROM employee", function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        connection.end;
+        question1Prompt();
+    });
+}
 
 //READ employees
 const readAllEmployees = function readEmployees(){
