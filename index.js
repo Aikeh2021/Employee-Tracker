@@ -1,6 +1,9 @@
 const inquirer = require("inquirer");
 const mysql = require("mysql");
 
+//Each time an employee is added, they need to be pushed into an array. This will help with the remove employee function
+let employeeArray = [];
+
 //this is the first question user will see
 inquirer.prompt([
     {
@@ -46,4 +49,12 @@ const readAllEmployees = function readEmployees(){
         console.table(res);
         connection.end;
     });
+}
+
+//DELETE an employee
+const deleteEmployees = function deleteEmployee() {
+    connection.query("DELETE FROM employee WHERE ?",
+    {
+
+    })
 }
