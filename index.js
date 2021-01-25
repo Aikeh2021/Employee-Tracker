@@ -45,7 +45,7 @@ const question1Prompt = function askQuestion1(){
             console.log("Read employees by manager");
         }
         else if(response.question1 === "Add employee"){
-            console.log("Insert into employee table");
+            // console.log("Insert into employee table");
             question3Prompt();
         }
         else if(response.question1 === "Remove employee"){
@@ -90,9 +90,11 @@ const question2Prompt = function askQuestion2(){
         //call the delete employee function
         //loop over the employee array and remove the selected employee
     });
-    
+}
+
     //This question should come after the user wants to add an employee
     const question3Prompt = function askAddFollowUps(){
+        console.log("something");
         inquirer.prompt([
             {
                 type: "input",
@@ -123,20 +125,7 @@ const question2Prompt = function askQuestion2(){
             //Update the employee array
         });
     };
-    }
-
-
-//Writing out the functions for to interact with sql database
-
-//READ employees
-const readAllEmployees = function readEmployees(){
-    connection.query("SELECT * FROM employee", function(err, res) {
-        if (err) throw err;
-        console.table(res);
-        connection.end;
-        question1Prompt();
-    });
-}
+    
 
 //DELETE an employee
 const deleteEmployees = function deleteEmployee() {
@@ -172,6 +161,20 @@ const createEmployees = function createEmployee(){
         }
     )
 }
+
+
+//Writing out the functions for to interact with sql database
+
+//READ employees
+const readAllEmployees = function readEmployees(){
+    connection.query("SELECT * FROM employee", function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        connection.end;
+        question1Prompt();
+    });
+}
+
 
 //Writing a function to end the computer management system if the user chooses to exit
 const exitNow = function exit(){
