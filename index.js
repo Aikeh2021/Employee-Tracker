@@ -8,52 +8,54 @@ let roleArray = [];
 let departmentArray = [];
 
 //this is the first question user will see
-const question1Prompt = inquirer.prompt([
-    {
-        type: "list",
-        name: "question1",
-        message: "What would you like to do?",
-        choices: ["View all employees", "View all employees by department", "View all employees by manager", "Add employee", "Remove employee", "Update employee role", "Update employee manager", "Add a department", "Add a role", "View all departments", "View all roles"]
-    }
-])
-.then((response) => {
-    if(response.question1 === "View all employess"){
-        console.log("Read employee table");
-    }
-    else if(response.question1 === "View all employees by department"){
-        console.log("Read employees by department");
-    }
-    else if(response.question1 === "View all employees by manager"){
-        console.log("Read employees by manager");
-    }
-    else if(response.question1 === "Add employee"){
-        console.log("Insert into employee table");
-    }
-    else if(response.question1 === "Remove employee"){
-        console.log("Delete from employee table");
-    }
-    else if(response.question1 === "Update employee role"){
-        console.log("Update employee with id of blank, role to blank");
-    }
-    else if(response.question1 === "Update employee manager"){
-        console.log("Update employee with id of blank, manager to blank");
-    }
-    else if(response.question1 === "Add a department"){
-        console.log("Call function to create a department");
-    }
-    else if(response.question1 === "Add a role"){
-        console.log("Call a function to create a role");
-    }
-    else if(response.question1 === "View all departments"){
-        console.log("Call a function to display all the departments")
-    }
-    else if(response.question1 === "View all roles"){
-        console.log("Call a function to display all the roles");
-    }
-    else{
-        console.log("Goodbye!");
-    }
-});
+const question1Prompt = function askQuestion1(){
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "question1",
+            message: "What would you like to do?",
+            choices: ["View all employees", "View all employees by department", "View all employees by manager", "Add employee", "Remove employee", "Update employee role", "Update employee manager", "Add a department", "Add a role", "View all departments", "View all roles"]
+        }
+    ])
+    .then((response) => {
+        if(response.question1 === "View all employess"){
+            console.log("Read employee table");
+        }
+        else if(response.question1 === "View all employees by department"){
+            console.log("Read employees by department");
+        }
+        else if(response.question1 === "View all employees by manager"){
+            console.log("Read employees by manager");
+        }
+        else if(response.question1 === "Add employee"){
+            console.log("Insert into employee table");
+        }
+        else if(response.question1 === "Remove employee"){
+            console.log("Delete from employee table");
+        }
+        else if(response.question1 === "Update employee role"){
+            console.log("Update employee with id of blank, role to blank");
+        }
+        else if(response.question1 === "Update employee manager"){
+            console.log("Update employee with id of blank, manager to blank");
+        }
+        else if(response.question1 === "Add a department"){
+            console.log("Call function to create a department");
+        }
+        else if(response.question1 === "Add a role"){
+            console.log("Call a function to create a role");
+        }
+        else if(response.question1 === "View all departments"){
+            console.log("Call a function to display all the departments")
+        }
+        else if(response.question1 === "View all roles"){
+            console.log("Call a function to display all the roles");
+        }
+        else{
+            console.log("Goodbye!");
+        }
+    });
+};
 
 //This question should come after the user wants to remove an employee
 const question2Prompt = inquirer.prompt([
@@ -147,3 +149,5 @@ const createEmployees = function createEmployee(){
         }
     )
 }
+
+question1Prompt();
