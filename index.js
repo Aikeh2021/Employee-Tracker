@@ -190,6 +190,14 @@ function readRoles(){
 }
 
 
+//INSERT INTO departments (add a department)
+function addDepartment(){
+    connection.query("INSERT INTO department SET ?",
+    {
+        name: 
+    })
+}
+
 //Writing a function to end the computer management system if the user chooses to exit
 function exit(){
     console.log("Goodbye for now!");
