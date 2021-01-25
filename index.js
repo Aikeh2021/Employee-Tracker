@@ -70,7 +70,7 @@ const question1Prompt = function askQuestion1(){
             console.log("Call a function to display all the roles");
         }
         else{
-            exitNow();
+            exit();
         }
     });
 };
@@ -98,32 +98,45 @@ const question2Prompt = function askQuestion2(){
         inquirer.prompt([
             {
                 type: "input",
-                name: "question3P1",
+                name: "first_name",
                 message: "What is the employee's first name?"
             },
             {
                 type: "input",
-                name: "question3P2",
+                name: "last_name",
                 message: "What is the employee's last name?"
             },
             {
                 type: "list",
-                name: "question3P3",
+                name: "role",
                 message: "What is the employee's role?",
                 choices: roleTitleArray
             },
             {
                 type: "list",
-                name: "question3P4",
+                name: "manager",
                 message: "Who is the employee's manager?",
                 choices: managerArray
             }
         ])
         .then((createdEmployee) =>{
-            console.log(`Added ${createdEmployee.question3P1} ${createdEmployee.question3P2} to the database`);
-            //call the createEmployee function
-            //Update the employee array
-        });
+            console.log(`Added ${createdEmployee.first_name} ${createdEmployee.last_name} to the database`);
+            //CREATE an employee
+            connection.query(
+                "INSERT INTO employee SET ?",
+                createdEmployee,
+                function(err, res) {
+                    if(err) throw err;
+                    let newEmployee = "";
+                    newEmployee = `${createdEmployee.first_name} ${createdEmployee.last_name}` + newEmployee;
+                employeeArray.push(newEmployee);
+                console.log(employeeArray);
+            question1Prompt();
+        })
+            
+        
+    });
+        
     };
     
 
@@ -144,23 +157,6 @@ const deleteEmployees = function deleteEmployee() {
     );
 }
 
-//CREATE an employee
-const createEmployees = function createEmployee(){
-    let query = connection.query(
-        "INSERT INTO employee SET ?",
-        {
-            first_name: "employee's first name",
-            last_name: "employee's last name",
-            role_id: "employee's role",
-            manager_id: "employee's manager"
-        },
-        function(err, res) {
-            if(err) throw err;
-            //push the new employee's first and last name into an empty string and then into the employee array;
-            question1Prompt();
-        }
-    )
-}
 
 
 //Writing out the functions for to interact with sql database
@@ -177,7 +173,7 @@ const readAllEmployees = function readEmployees(){
 
 
 //Writing a function to end the computer management system if the user chooses to exit
-const exitNow = function exit(){
+function exit(){
     console.log("Goodbye for now!");
     connection.end();
 }
