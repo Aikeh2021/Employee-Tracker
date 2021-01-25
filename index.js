@@ -18,7 +18,7 @@ const question1Prompt = function askQuestion1(){
         }
     ])
     .then((response) => {
-        if(response.question1 === "View all employess"){
+        if(response.question1 === "View all employees"){
             console.log("Read employee table");
         }
         else if(response.question1 === "View all employees by department"){
