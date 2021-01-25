@@ -14,7 +14,7 @@ const question1Prompt = function askQuestion1(){
             type: "list",
             name: "question1",
             message: "What would you like to do?",
-            choices: ["View all employees", "View all employees by department", "View all employees by manager", "Add employee", "Remove employee", "Update employee role", "Update employee manager", "Add a department", "Add a role", "View all departments", "View all roles"]
+            choices: ["View all employees", "View all employees by department", "View all employees by manager", "Add employee", "Remove employee", "Update employee role", "Update employee manager", "Add a department", "Add a role", "View all departments", "View all roles", "EXIT"]
         }
     ])
     .then((response) => {
@@ -152,5 +152,12 @@ const createEmployees = function createEmployee(){
         }
     )
 }
+
+//Writing a function to end the computer management system if the user chooses to exit
+const exitNow = function exit(){
+    console.log("Goodbye for now!");
+    connection.end();
+}
+
 
 question1Prompt();
