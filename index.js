@@ -127,10 +127,6 @@ const question2Prompt = function askQuestion2(){
                 createdEmployee,
                 function(err, res) {
                     if(err) throw err;
-                    let newEmployee = "";
-                    newEmployee = `${createdEmployee.first_name} ${createdEmployee.last_name}` + newEmployee;
-                employeeArray.push(newEmployee);
-                console.log(employeeArray);
             question1Prompt();
         })
             
