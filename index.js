@@ -68,7 +68,8 @@ const question1Prompt = function askQuestion1(){
             readDepartments();
         }
         else if(response.question1 === "View all roles"){
-            console.log("Call a function to display all the roles");
+            // console.log("Call a function to display all the roles");
+            readRoles();
         }
         else{
             exit();
@@ -171,6 +172,16 @@ function readEmployees(){
 //READ departments
  function readDepartments(){
     connection.query("SELECT * FROM department", function(err, res) {
+        if (err) throw err;
+        console.table(res);
+        connection.end;
+        question1Prompt();
+    });
+}
+
+//READ roles
+function readRoles(){
+    connection.query("SELECT * FROM role", function(err, res) {
         if (err) throw err;
         console.table(res);
         connection.end;
