@@ -24,7 +24,7 @@ CREATE TABLE role (
   -- Makes a string column called "title" which cannot contain null --
   title VARCHAR(30) NOT NULL,
   -- Create a numeric column that accepts decimals. Will be called "salary." You can put 7 numbers before the decimal point and 2 after the decimal point.
-  salary DECIMAL (7,2) NOT NULL,
+  salary DECIMAL (10,2) NOT NULL,
   -- to hold reference to role employee has --
   department_id INTEGER NOT NULL,
   -- Sets id as this table's primary key which means all data contained within it will be unique --
@@ -46,9 +46,6 @@ CREATE TABLE employee (
   PRIMARY KEY (id)
   );
   
-  SELECT * FROM department;
-  SELECT * FROM role;
-  SELECT * FROM employee;
 
 
 -- Creates new rows containing data in the named columns --
@@ -72,4 +69,9 @@ INSERT INTO role (title, salary, department_id)
 VALUES ("Lawyer", 190000, 4);
 
 INSERT INTO employee (first_name, last_name, role_id)
-VALUES ("Ashley", "Ikeh", 4);
+VALUES ("Ashley", "Ikeh", 1);
+
+
+  SELECT * FROM department;
+  SELECT * FROM role;
+  SELECT * FROM employee;
