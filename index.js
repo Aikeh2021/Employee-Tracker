@@ -10,7 +10,11 @@ var connection = mysql.createConnection({
     database: "company_db"
 });
 
-
+connection.connect(function(err) {
+    if(err) throw err;
+    console.log("connected as id" + connection.threadId + "\n");
+    question1Prompt();
+})
 
 
 //Each time an employee is added, they need to be pushed into an array. This will help with the remove employee function
@@ -172,4 +176,3 @@ const exitNow = function exit(){
 }
 
 
-question1Prompt();
