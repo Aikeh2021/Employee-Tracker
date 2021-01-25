@@ -52,7 +52,7 @@ const question1Prompt = function askQuestion1(){
             console.log("Call a function to display all the roles");
         }
         else{
-            console.log("Goodbye!");
+            exitNow();
         }
     });
 };
