@@ -55,6 +55,13 @@ const readAllEmployees = function readEmployees(){
 const deleteEmployees = function deleteEmployee() {
     connection.query("DELETE FROM employee WHERE ?",
     {
-
-    })
+        first_name: "employee's first name",
+        last_name: "employee's last name"
+    },
+    function (err, res) {
+        if (err) throw err;
+        console.log("Removed employee from the database");
+        connection.end;
+    }
+    );
 }
