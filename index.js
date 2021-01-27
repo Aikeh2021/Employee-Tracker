@@ -86,7 +86,12 @@ function removeEmployee(){
         }
     ])
     .then((toRemove) =>{
-        connection.query('DELETE FROM employee WHERE  first_name = ? last_name = ?' [toRemove], function(err, res) {
+        connection.query('DELETE FROM employee WHERE ?',
+        {
+            first_name: toRemove.first_name,
+            // last_name: toRemove.last_name
+        },
+        function(err, res) {
             if(err) throw err;
             console.log("Removed an employee");
             question1Prompt();
@@ -101,6 +106,8 @@ function removeEmployee(){
 
     //This question should come after the user wants to add an employee
 function addEmployee(){
+    connection.query("SELECT * FROM role", function (err, res){
+        if(err) throw err;
         inquirer.prompt([
             {
                 type: "input",
@@ -116,18 +123,17 @@ function addEmployee(){
                 type: "list",
                 name: "role",
                 message: "What is the employee's role?",
-                choices: roleTitleArray
+                choices: res.map((role) => `${role.title}`)
             },
-            {
-                type: "list",
-                name: "manager",
-                message: "Who is the employee's manager?",
-                choices: managerArray
-            }
+            // {
+            //     type: "list",
+            //     name: "manager",
+            //     message: "Who is the employee's manager?",
+            //     choices: res.map((employee) => `${employee.first_name} ${employee.last_name}`)
+            // }
         ])
         .then((createdEmployee) =>{
             console.log(`Added ${createdEmployee.first_name} ${createdEmployee.last_name} to the database`);
-            //CREATE an employee
             connection.query(
                 "INSERT INTO employee SET ?",
                 createdEmployee,
@@ -135,14 +141,14 @@ function addEmployee(){
                     if(err) throw err;
             question1Prompt();
         })
-            
+    })
+         
         
     });
         
     };
 
 
-//Writing out the functions for to interact with sql database
 
 //READ employees
 function readEmployees(){
